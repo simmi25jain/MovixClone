@@ -1,0 +1,14 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+}
+.right{
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    font-size: x-large;
+}
+.logo{
+    width: 200px;
+    height: 40px;
+}

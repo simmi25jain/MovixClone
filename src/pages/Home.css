@@ -1,0 +1,14 @@
+.poster_image{
+    width: 50vh;
+    height: 400px;
+    border-radius: 15px;
+}
+ul{
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    gap: 15px;
+}
+li{
+    list-style-type: none;
+}

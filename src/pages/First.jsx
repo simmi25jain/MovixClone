@@ -3,11 +3,14 @@ import Navbar from '../components/Navbar'
 import { Outlet } from 'react-router-dom'
 
 function First() {
-  return (
-    <div>
-        <Navbar/>
-        <Outlet/>
+  return (<>
+    <div className="navbar">
+      <Navbar />
     </div>
+    <div>
+      <Outlet />
+    </div>
+  </>
   )
 }
 

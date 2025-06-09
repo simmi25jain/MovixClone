@@ -1,0 +1,23 @@
+.footerMainContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000409;
+    padding: 50px 0;
+    color: #fff;
+}
+.footerContainer{
+text-align: center;
+width: 70%;
+}
+.footerPages,.footerIcons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    list-style-type: none;
+}
+.footerDescription{
+    margin: 30px;
+    opacity: 0.5;
+}

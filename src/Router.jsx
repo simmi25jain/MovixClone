@@ -6,30 +6,35 @@ import Movies from './pages/Movies'
 import Tvshows from './pages/Tvshows'
 import First from './pages/First'
 import App from './App'
+import Search from './pages/Search'
 
 const router = createBrowserRouter([{
-  path: "/",
-  element: <First />,
-  children: [
-    {
-      index: true,
-      element: <App />
-    },
-     {
-      path: "/Movies",
-      element: <Movies />
-    },
-     {
-      path: "/Tvshows",
-      element: <Tvshows />
-    }
-  ]
+    path: "/",
+    element: <First />,
+    children: [
+        {
+            index: true,
+            element: <App />
+        },
+        {
+            path: "/Movies",
+            element: <Movies />
+        },
+        {
+            path: "/Tvshows",
+            element: <Tvshows />
+        },
+        {
+            path: "/search",
+            element: <Search />
+        }
+    ]
 }])
 
 function Router() {
-  return (
-    <RouterProvider router={router}></RouterProvider>
-  )
+    return (
+        <RouterProvider router={router}></RouterProvider>
+    )
 }
 
 export default Router

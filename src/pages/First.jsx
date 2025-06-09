@@ -1,16 +1,15 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import { Outlet } from 'react-router-dom'
+import Footer from '../components/Footer'
 
 function First() {
-  return (<>
-    <div className="navbar">
+  return (
+    <>
       <Navbar />
-    </div>
-    <div>
       <Outlet />
-    </div>
-  </>
+      <Footer/>
+    </>
   )
 }
 

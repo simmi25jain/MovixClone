@@ -1,6 +1,6 @@
 .poster_image {
   width: 35vh;
-  height: 300px;
+  height: 330px;
   border-radius: 15px;
 }
 
@@ -24,7 +24,7 @@ ul.scrollBar li {
 }
 
 .container {
-  margin: 0px 100px;
+  margin: 60px 100px;
 }
 
 .heading {
@@ -36,14 +36,14 @@ ul.scrollBar li {
   background: linear-gradient(98.37deg, #f89e00 0.99%, #da2f68 100%);
   border: none;
   color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
+  padding: 10px 30px;
+  border-radius: 35px;
 }
 
 .btn2 {
   border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
+  padding: 10px 30px;
+  border-radius: 35px;
 }
 
 .heading-btn {
@@ -56,15 +56,15 @@ ul.scrollBar li {
 
 .homeBtns {
   background-color: white;
-  /* padding: 15px 85px; */
-  border-radius: 20px;
+  padding: 5px ;
+  border-radius: 35px;
   display: flex;
   justify-content: space-around;
   gap: 10px;
 }
 
 .movieTitle{
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .releaseDate{

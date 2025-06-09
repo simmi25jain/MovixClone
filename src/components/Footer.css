@@ -8,18 +8,26 @@
 }
 .footerContainer{
 text-align: center;
-width: 70%;
+width: 63%;
 }
-.footerPages,.footerIcons{
+.footerPages{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 30px;
     list-style-type: none;
 }
 .footerDescription{
     margin: 30px;
     opacity: 0.5;
+    font-size: 14px;
+}
+.footerIcons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    list-style-type: none;
 }
 .footerIcons li{
 width: 50px;

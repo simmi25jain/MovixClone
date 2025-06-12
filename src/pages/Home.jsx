@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
+import { useNavigate } from "react-router-dom";
 
 const baseImageURL = "https://image.tmdb.org/t/p/original";
 
@@ -23,52 +24,68 @@ function Home({ heading, btn1, btn2, urls }) {
   // }, [showData]);
 
   useEffect(() => {
-    async function fetchTrendingMovies() {
+    async function fetchTrendingMoviesDay() {
       try {
-        const res = await fetch(showData);
-        const json = await res.json();
-        setAllMovieData(json.results || []);
+        const response = await fetch(showData);
+        const result = await response.json();
+        const data = result.results || [];
+        setAllMovieData(data);
       } catch (err) {
-        console.error("Error fetching movies:", err);
+        console.error("Error fetching trending movies:", err);
       }
     }
-    fetchTrendingMovies();
+    fetchTrendingMoviesDay();
   }, [showData]);
+  // console.log(showData);
 
   function trimContent(content) {
     if (content.length > 28) {
       return content.slice(0, 16) + "...";
     }
-    return content;
+    return content
   }
-
+  const navigate = useNavigate();
+  function handleSinglePage(id) {
+    navigate(`/SinglePages/${id}`);
+  }
   return (
     <div className="container">
       <div className="heading-btn">
         <h1 className="heading">{heading}</h1>
         <div className="homeBtns">
-          <button className="btn1" onClick={() => setShowData(urls[0])}>{btn1}</button>
-          <button className="btn2" onClick={() => setShowData(urls[1])}>{btn2}</button>
+          <button className="btn1" onClick={() => setShowData(urls[0])}>
+            {btn1}
+          </button>
+          <button className="btn2" onClick={() => setShowData(urls[1])}>
+            {btn2}
+          </button>
         </div>
       </div>
 
       <ul className="scrollBar">
-        {allMovieData.map((movie) => (
-          <li key={movie.id}>
-            <div className="poster">
-              <img
-                className="poster_image"
-                src={`${baseImageURL}${movie?.poster_path}`}
-                alt={movie.title || movie.name}
-              />
-            </div>
-            <div className="movieTitle">{trimContent(movie.original_title || movie.name)}</div>
-            <div className="releaseDate">{new Date(movie.release_date || movie.first_air_date).toLocaleDateString("en-US", {
+        {allMovieData.map((movie) => 
+          (
+          <li key={movie.id} onClick={() => handleSinglePage(movie.id)} >
+          <div className="poster">
+            <img
+              className="poster_image"
+              src={`${baseImageURL}${movie?.poster_path}`}
+              alt={movie.title || movie.name}
+            />
+          </div>
+          <div className="MovieName">
+            {trimContent(movie.original_title || movie.name)}
+          </div>
+          <div className="releaseDate">
+            {new Date(
+              movie.release_date || movie.first_air_date
+            ).toLocaleDateString("en-US", {
               day: "numeric",
               month: "long",
               year: "numeric",
-            })}</div>
-          </li>
+            })}
+          </div>
+        </li>
         ))}
       </ul>
     </div>

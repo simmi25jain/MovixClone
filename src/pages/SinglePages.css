@@ -1,0 +1,102 @@
+.singleImage {
+  width: 100%;
+  border-radius: 3%;
+}
+.SinglePosterConatiner {
+  display: flex;
+  justify-content: space-evenly;
+  /* align-items: center; */
+  padding: 55px 200px;
+  gap: 50px;
+}
+.posterSingleImage {
+  width: 100%;
+}
+.SingleContentTitle {
+  font-size: 34px;
+}
+.SingleContentSubTitle {
+  margin-bottom: 15px;
+  font-style: italic;
+  opacity: 0.5;
+  font-size: 20px;
+}
+.singleMovieTheme {
+  display: flex;
+  gap: 5px;
+
+  margin-bottom: 25px;
+  flex-flow: row wrap;
+}
+.singleMovieTheme button {
+  background-color: #da2f68;
+  border: none;
+  padding: 3px 5px;
+  font-size: 12px;
+  border-radius: 4px;
+  color: #fff;
+  white-space: nowrap;
+}
+.singleMovieOverview {
+  /* margin-bottom: 25px; */
+}
+.singleMovieOverview span {
+  font-size: 24px;
+  /* margin-bottom: 25px; */
+}
+.singleMovieOverview p {
+      margin-top: 10px;
+      line-height: 24px;
+}
+.play-button-container {
+  width: 85px;
+  height: 85px;
+  border: 3px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.play-icon {
+  color: white;
+  font-size: 20px;
+}
+
+.play-button-container:hover {
+  transform: scale(1.1);
+  color: #e60073;
+  border: 3px solid #e60073; /* pinkish-red */
+}
+.singlePagePlayBtns {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 25px;
+  align-items: center;
+  font-size: 20px;
+}
+.basic-info{
+  display: flex;
+    gap: 20px;
+    border-bottom: 1px solid #4e4848;
+    padding-bottom: 20px;
+    margin-top: 25px;
+}
+.status ,.release-date,.runtime{
+  display: flex;
+    gap: 10px;
+}
+.basic-info-title{
+  font-weight: bold;
+}
+.basic-info-subtitle{
+  opacity: 0.5;
+}
+.credits{
+  display: grid;
+}
+.director , .writer{
+  gap: 10px;
+}

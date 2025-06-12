@@ -7,6 +7,7 @@ import Tvshows from './pages/Tvshows'
 import First from './pages/First'
 import App from './App'
 import Search from './pages/Search'
+import SinglePages from './pages/SinglePages'
 
 const router = createBrowserRouter([{
     path: "/",
@@ -27,7 +28,12 @@ const router = createBrowserRouter([{
         {
             path: "/search",
             element: <Search />
+        },
+        {
+            path:"/SinglePages/:id",
+            element:<SinglePages/>
         }
+
     ]
 }])
 

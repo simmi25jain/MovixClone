@@ -1,4 +1,4 @@
-.footerMainContainer{
+.footerMainContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,31 +6,36 @@
     padding: 50px 0;
     color: #fff;
 }
-.footerContainer{
-text-align: center;
-width: 63%;
+
+.footerContainer {
+    text-align: center;
+    width: 63%;
 }
-.footerPages{
+
+.footerPages {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 30px;
     list-style-type: none;
 }
-.footerDescription{
+
+.footerDescription {
     margin: 30px;
     opacity: 0.5;
     font-size: 14px;
 }
-.footerIcons{
+
+.footerIcons {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     list-style-type: none;
 }
-.footerIcons li{
-width: 50px;
+
+.footerIcons li {
+    width: 50px;
     height: 50px;
     border-radius: 50%;
     background-color: #04152d;
@@ -39,4 +44,13 @@ width: 50px;
     justify-content: center;
     cursor: pointer;
     transition: all ease .3s;
+}
+
+.footerIcons :hover {
+    transform: scale(1.1);
+    color: #e60073;
+    border: 3px solid #e60073;
+    /* pinkish-red */
+    transition: transform 0.3s;
+
 }

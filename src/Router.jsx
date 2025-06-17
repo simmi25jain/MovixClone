@@ -8,8 +8,9 @@ import First from './pages/First'
 import App from './App'
 import Search from './pages/Search'
 import SinglePages from './pages/SinglePages'
+import { urls } from './data'
 
-const router = createBrowserRouter([{
+const router = createBrowserRouter([{ //browser ke URL ke basis pr pages change karta h (without reload)
     path: "/",
     element: <First />,
     children: [
@@ -19,19 +20,19 @@ const router = createBrowserRouter([{
         },
         {
             path: "/Movies",
-            element: <Movies />
+            element: <Movies heading="Explore Movies" urls={[urls.topRatedMovies, urls.topRatedTvshows]} />
         },
         {
             path: "/Tvshows",
             element: <Tvshows />
         },
+        // {
+        //     path: "/search",
+        //     element: <Search />
+        // },
         {
-            path: "/search",
-            element: <Search />
-        },
-        {
-            path:"/SinglePages/:id",
-            element:<SinglePages/>
+            path: "/SinglePages/:id",
+            element: <SinglePages />
         }
 
     ]

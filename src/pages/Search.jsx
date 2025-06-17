@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './Search.css';
 
 function Search() {
-    const [backgroundImg, setBackgroundImg] = useState([]);
-    useEffect(() => {
+    const [backgroundImg, setBackgroundImg] = useState([]); //useState- Movie data aur selected URL ko manage karta hai
+    useEffect(() => { //useEffect- Jab bhi URL change hota hai, API se fresh data fetch hota hai
         fetchBackgroundImg();
     }, []);
 

@@ -44,10 +44,12 @@ function Home({ heading, btn1, btn2, urls }) {
     }
     return content
   }
+
   const navigate = useNavigate();
   function handleSinglePage(id) {
     navigate(`/SinglePages/${id}`);
   }
+  
   return (
     <div className="container">
       <div className="heading-btn">
@@ -63,29 +65,29 @@ function Home({ heading, btn1, btn2, urls }) {
       </div>
 
       <ul className="scrollBar">
-        {allMovieData.map((movie) => 
-          (
+        {allMovieData.map((movie) =>
+        (
           <li key={movie.id} onClick={() => handleSinglePage(movie.id)} >
-          <div className="poster">
-            <img
-              className="poster_image"
-              src={`${baseImageURL}${movie?.poster_path}`}
-              alt={movie.title || movie.name}
-            />
-          </div>
-          <div className="MovieName">
-            {trimContent(movie.original_title || movie.name)}
-          </div>
-          <div className="releaseDate">
-            {new Date(
-              movie.release_date || movie.first_air_date
-            ).toLocaleDateString("en-US", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </div>
-        </li>
+            <div className="poster">
+              <img
+                className="poster_image"
+                src={`${baseImageURL}${movie?.poster_path}`}
+                alt={movie.title || movie.name}
+              />
+            </div>
+            <div className="MovieName">
+              {trimContent(movie.original_title || movie.name)}
+            </div>
+            <div className="releaseDate">
+              {new Date(
+                movie.release_date || movie.first_air_date
+              ).toLocaleDateString("en-US", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </div>
+          </li>
         ))}
       </ul>
     </div>

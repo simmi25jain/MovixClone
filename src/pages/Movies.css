@@ -34,3 +34,13 @@
     background-color: white;
     color: black;
 }
+
+.movieList{
+    display: flex;
+    flex-wrap:wrap;
+    gap:5px;
+}
+
+.movieList li{
+    list-style-type:none;
+}

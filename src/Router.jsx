@@ -20,11 +20,11 @@ const router = createBrowserRouter([{ //browser ke URL ke basis pr pages change 
         },
         {
             path: "/Movies",
-            element: <Movies heading="Explore Movies" urls={[urls.topRatedMovies, urls.topRatedTvshows]} />
+            element: <Movies heading="Explore Movies" urls={[urls.trendingMoviesDay, urls.trendingMoviesWeek,urls.popularMovies,urls.topRatedMovies]} />
         },
         {
             path: "/Tvshows",
-            element: <Tvshows />
+            element: <Tvshows heading="Explore Tvshows" urls={[urls.popularTvshows,urls.topRatedTvshows]} />
         },
         // {
         //     path: "/search",

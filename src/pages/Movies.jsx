@@ -3,47 +3,125 @@ import "./Home.css";
 import { useNavigate } from "react-router-dom";
 // import { urls } from "../Urls";
 const baseImageURL = "https://image.tmdb.org/t/p/original";
-import './Movies.css'
+import "./Movies.css";
 
-function Movies({heading,urls}) {
+function Movies({ heading, urls }) {
   const [allMovieData, setAllMovieData] = useState([]);
-  // const [showData, setShowData] = useState(urls[0]);
-  const [showData, setShowData] = useState(() => (urls && urls.length > 0 ? urls[0] : ""));
-const [showGenres, setShowGenres] = useState([]);
-  const [sortBy, setSortBy] = useState([]);
+  const [showData, setShowData] = useState(urls[0]);
+  const [showGenres, setShowGenres] = useState([]);
+  const [selectGenres, setSelectGenres] = useState("");
+  const [sortBy, setSortBy] = useState("");
+
+  const sortOptions = [
+    { label: "Popularity Descending", value: "popularity.desc" },
+    { label: "Popularity Ascending", value: "popularity.asc" },
+    { label: "Rating Descending", value: "vote_average.desc" },
+    { label: "Rating Ascending", value: "vote_average.asc" },
+    { label: "Release Date Descending", value: "release_date.desc" },
+    { label: "Release Date Ascending", value: "release_date.asc" },
+    { label: "Title (A-Z)", value: "original_title.asc" },
+  ];
 
   // useEffect(() => {
-  //   async function fetchTrendingMoviesDay() {
+  //   async function fetchFilteredMovies() {
+  //     const baseUrl = "https://api.themoviedb.org/3/discover/movie";
+  //     const api_key = "57ba7c00ee14d8883b9d0fd8084391a0";
+  //     let url = ${baseUrl}?api_key=${api_key};
+
+  //     if (selectGenres) {
+  //       url += &with_genres=${selectGenres};
+  //     }
+  //     if (sortBy) {
+  //       url += &sort_by=${sortBy};
+  //     }
+
+  //     try {
+  //       const response = await fetch(url);
+  //       const result = await response.json();
+  //       const data = result.results || [];
+  //       setAllMovieData(data);
+  //     }
+  //     catch (err) {
+  //       console.error("Error fetching movies:", err);
+  //     }
+  //   }
+  //   fetchFilteredMovies();
+  // }, [selectGenres, sortBy]);
+
+  useEffect(() => {
+    async function fetchMovies() {
+      try {
+        // When filter/sort is applied, use discover API
+        if (selectGenres || sortBy) {
+          setAllMovieData([]);
+          const baseUrl = "https://api.themoviedb.org/3/discover/movie";
+          const api_key = "57ba7c00ee14d8883b9d0fd8084391a0";
+          let url = `${baseUrl}?api_key=${api_key}`;
+
+          if (selectGenres) {
+            url += `&with_genres=${selectGenres}`;
+          }
+          if (sortBy) {
+            url += `&sort_by=${sortBy}`;
+          }
+          console.log(url);
+
+          const response = await fetch(url);
+          const result = await response.json();
+          const data = result.results || [];
+          console.log(data);
+          setAllMovieData(data);
+        }
+        // Otherwise, load initial data from urls
+        else {
+          const responses = await Promise.all(urls.map((url) => fetch(url)));
+          const results = await Promise.all(responses.map((res) => res.json()));
+          const data = results.flatMap((res) => res.results || []);
+          console.log(data);
+
+          setAllMovieData(data);
+        }
+      } catch (err) {
+        console.error("Error fetching movies:", err);
+        0;
+      }
+    }
+
+    fetchMovies();
+  }, [selectGenres, sortBy, showData]);
+
+  useEffect(() => {
+    async function fetchGenres() {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/genre/movie/list?language=en&api_key=57ba7c00ee14d8883b9d0fd8084391a0`
+        );
+        const result = await response.json();
+        const data = result.genres || [];
+        setShowGenres(data);
+        console.log(data);
+      } catch (err) {
+        console.error("Error fetching genres:", err);
+      }
+    }
+    fetchGenres();
+  }, []);
+
+  // useEffect(() => {
+  //   async function fetchAllMoviesDay() {
   //     try {
   //       const responses = await Promise.all(urls.map((url) => fetch(url)));
   //       const results = await Promise.all(responses.map((res) => res.json()));
   //       const data = results.flatMap((res) => res.results || []);
   //       setAllMovieData(data);
   //     } catch (err) {
-  //       console.error("Error fetching trending movies:", err);
+  //       console.error("Error fetching all movies:", err);
   //     }
   //   }
 
-  //   fetchTrendingMoviesDay();
+  //   fetchAllMoviesDay();
   // }, [showData]);
 
-  useEffect(() => {
-    async function fetchTrendingMoviesDay() {
-      try {
-        const response = await fetch(showData);
-        const result = await response.json();
-        const data = result.results || [];
-        setAllMovieData(data);
-        console.log(data);
-        
-      } catch (err) {
-        console.error("Error fetching trending movies:", err);
-      }
-    }
-
-    fetchTrendingMoviesDay();
-  }, [showData]);
-  // console.log(showData);
   function trimContent(content) {
     if (content.length > 28) {
       return content.slice(0, 16) + "...";
@@ -52,47 +130,45 @@ const [showGenres, setShowGenres] = useState([]);
   }
   const navigate = useNavigate();
   function handleSinglePage(id) {
-    navigate(`/SinglePages/${id}`);
+    navigate(`/SinglePages/${id}?type=movie`);
   }
-  const sortOptions = [
-    { label: "Popularity Descending", value: "popularity.desc" },
-    { label: "Popularity Ascending", value: "popularity.asc" },
-    { label: "Rating Descending", value: "vote_average.desc" },
-    { label: "Rating Ascending", value: "vote_average.asc" },
-    { label: "Release Date Descending", value: "release_date.desc" },
-    { label: "Release Date Ascending", value: "release_date.asc" },
-    { label: "Title (A-Z)", value: "original_title.asc" }
-  ];
+
   return (
     <div className="container">
       <div className="heading-btn">
         <h1 className="heading">{heading}</h1>
-        {/* <div className="homeBtns"> */}
-          <div className="filter">
-          <select className='selectGenres'>
+        <div className="filter">
+          <select
+            className="selectGenres"
+            value={selectGenres}
+            onChange={(e) => setSelectGenres(e.target.value)}
+          >
             <option value="">Select Genres</option>
             {showGenres.map((genres) => (
-              <option key={genres.id} value={genres.id}>{genres.name}</option>
-            )
-            )}
+              <option key={genres.id} value={genres.id}>
+                {genres.name}
+              </option>
+            ))}
           </select>
-
-          <select className='selectSortBy'>
+          <select
+            className="selectSortBy"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+          >
             <option value="">Sort By</option>
             {sortOptions.map((sort) => (
-              <option key={sort.value} value={sort.value}>{sort.label}</option>
-            )
-            )}
+              <option key={sort.value} value={sort.value}>
+                {sort.label}
+              </option>
+            ))}
           </select>
-
+                  
         </div>
-
-        {/* </div> */}
       </div>
 
-      <ul className="scrollBar">
+      <ul className="movieList">
         {allMovieData.map((movie) => (
-          <li key={movie.id} onClick={()=>handleSinglePage(movie.id)}>
+          <li key={movie.id} onClick={() => handleSinglePage(movie.id)}>
             <div className="poster">
               <img
                 className="poster_image"
@@ -110,14 +186,13 @@ const [showGenres, setShowGenres] = useState([]);
                 day: "numeric",
                 month: "long",
                 year: "numeric",
-              })
-              }
+              })}
             </div>
           </li>
         ))}
       </ul>
     </div>
   );
-} 
+}
 
 export default Movies;

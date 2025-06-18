@@ -5,17 +5,22 @@ import "../pages/SinglePages.css";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { FaPlay } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 function SinglePages() {
   const [movieData, setMovieData] = useState(null);
   const { id } = useParams();
 
+  const location=useLocation();
+  const searchParams=new URLSearchParams(location.search);
+  const type=searchParams.get("type")||"movie"; //default to movie
+
+
   useEffect(() => {
     async function fetchMovieDetails() {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${id}?api_key=1912ac6f767998bd9f82c23be3dbc2df&append_to_response=videos,credits`
+          `https://api.themoviedb.org/3/${type}/${id}?api_key=1912ac6f767998bd9f82c23be3dbc2df&append_to_response=videos,credits`
         );
 
         const data = await response.json();
@@ -41,7 +46,9 @@ function SinglePages() {
     vote_average,
     genres,
     poster_path,
-    videos
+    videos, 
+    name,
+    first_air_date,
   } = movieData;
 
   return (
@@ -72,7 +79,7 @@ function SinglePages() {
         </div>
 
         <div className="posterSingleContent">
-          <div className="SingleContentTitle">{title} ({release_date?.slice(0, 4)})</div>
+          <div className="SingleContentTitle">{title||name} ({release_date||first_air_date?.slice(0, 4)})</div>
           <div className="SingleContentSubTitle">{tagline}</div>
 
           <div className="singleMovieTheme">
